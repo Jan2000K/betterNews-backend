@@ -88,8 +88,13 @@ namespace WebApplication1.Controllers
                     {
                         bool ok = true;
                         var articleDesc = article.Description.Replace("\n", "");
-                        string[] splitTitle = article.Title.Split(' ');
-                        string[] descSplit =articleDesc.Split(' ');
+                       
+                        string[] splitTitle = article.Title
+                            .Trim(new char[] { '.', ',', '!', '?' })
+                            .Split(' ');
+                        string[] descSplit =articleDesc
+                            .Trim(new char[] { '.', ',', '!', '?' })
+                            .Split(' ');
                         string[] blockedWordsLower = request.blockedWords.Select(word => word.ToLower()).ToArray();
                         foreach (string word in splitTitle)
                         {
